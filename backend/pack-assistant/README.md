@@ -49,3 +49,37 @@
 - **UI Library:** Material UI (MUI v5+)
 - **Routing:** React Router
 - **State Management:** React Context or Apollo Cache
+
+---
+
+
+## Data Model
+
+```graphql
+type Trip {
+  id: ID!
+  name: String!
+  destination: String
+  startDate: Date
+  endDate: Date
+  type: String
+  itemGroups: [ItemGroup!]!
+}
+
+type ItemGroup {
+  id: ID!
+  name: String!
+  tripId: ID!
+  items: [Item!]!
+}
+
+type Item {
+  id: ID!
+  name: String!
+  quantity: Int!
+  packed: Boolean!
+  recommended: Boolean
+  notes: String
+  itemGroupId: ID!
+}
+```
