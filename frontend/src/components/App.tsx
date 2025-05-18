@@ -1,7 +1,7 @@
-import { PackingListPage } from './PackingListPage'
+import { TripListPage } from "pages/TripListPage"
 
 export function App() {
-  return <PackingListPage />
+  return <TripListPage />
 }
 
 export default App

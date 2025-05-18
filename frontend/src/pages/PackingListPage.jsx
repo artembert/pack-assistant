@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
-import { HeaderBar } from './HeaderBar'
-import { TripInfo } from './TripInfo'
-import { AddItemRow } from './AddItemRow'
-import { CategorySection } from './CategorySection'
-import { ShowUncheckedRow } from './ShowUncheckedRow'
-import { FloatingAddButton } from './FloatingAddButton'
+import { HeaderBar } from 'components/HeaderBar'
+import { TripInfo } from 'components/TripInfo'
+import { AddItemRow } from 'components/AddItemRow'
+import { CategorySection } from 'components/CategorySection'
+import { ShowUncheckedRow } from 'components/ShowUncheckedRow'
+import { FloatingAddButton } from 'components/FloatingAddButton'
 
 const clothingItems = [
   { label: 'Suit', checked: true },
