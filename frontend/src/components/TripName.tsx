@@ -1,5 +1,4 @@
 import { Typography } from '@mui/material'
-import PropTypes from 'prop-types'
 import { useMemo } from 'react'
 
 const colors: string[] = [

@@ -24,7 +24,7 @@ export function CategorySection({
   const handleToggle = () => setExpanded((prev) => !prev)
 
   return (
-    <Box sx={{ mt: 2 }}>
+    <Box>
       <Box
         sx={{
           display: 'flex',

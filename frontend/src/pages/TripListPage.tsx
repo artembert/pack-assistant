@@ -1,15 +1,16 @@
+import AddIcon from '@mui/icons-material/Add'
 import {
   Box,
-  Typography,
+  Fab,
+  LinearProgress,
   List,
   ListItem,
-  LinearProgress,
-  Fab
+  Typography
 } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
-import { TripName } from '../components/TripName'
+import { HeaderBar } from 'components/HeaderBar'
 import { Link } from 'react-router-dom'
 import { PageLayout } from '../components/PageLayout'
+import { TripName } from '../components/TripName'
 
 const mockTrips = [
   { id: 1, name: 'Summer Vacation', progress: 80 },
@@ -20,10 +21,8 @@ const mockTrips = [
 export function TripListPage() {
   return (
     <PageLayout>
-      <Typography variant="h4" gutterBottom>
-        My Trips
-      </Typography>
-      <List sx={{ display: 'grid', gap: 2 }}>
+      <HeaderBar title="My Trips" />
+      <List sx={{ display: 'grid', mt: 2, p: 0, gap: 2 }}>
         {mockTrips.map((trip) => (
           <ListItem
             key={trip.id}
