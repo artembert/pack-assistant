@@ -2,14 +2,14 @@ import { Typography } from '@mui/material'
 import PropTypes from 'prop-types'
 import { useMemo } from 'react'
 
-const colors = [
+const colors: string[] = [
   '#1976d2', // blue 700
   '#1565c0', // blue 800
   '#0d47a1' // blue 900
 ]
 
 // Helper to generate random style for a character
-const getRandomStyle = () => {
+const getRandomStyle = (): React.CSSProperties => {
   const wght = Math.floor(Math.random() * 901) + 100 // 100–1000
   const wdth = Math.floor(Math.random() * 51) + 50 // 50–100
   const slnt = Math.floor(Math.random() * 21) - 10 // -10–10
@@ -23,7 +23,11 @@ const getRandomStyle = () => {
   }
 }
 
-export function CreativeTripName({ name }) {
+interface CreativeTripNameProps {
+  name: string
+}
+
+export function CreativeTripName({ name }: CreativeTripNameProps) {
   // Memoize the random styles so they only change when name changes
   const charStyles = useMemo(() => {
     return name
@@ -51,7 +55,7 @@ export function CreativeTripName({ name }) {
         if (char === ' ')
           return <span key={i} style={{ width: 16, display: 'inline-block' }} />
         return (
-          <span key={i} style={charStyles[i]}>
+          <span key={i} style={charStyles[i] as React.CSSProperties}>
             {char}
           </span>
         )
