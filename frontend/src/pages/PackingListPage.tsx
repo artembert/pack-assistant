@@ -1,10 +1,11 @@
-import { HeaderBar } from '../components/HeaderBar'
-import { TripInfo } from '../components/TripInfo'
+import { TripName } from 'components/TripName'
 import { AddItemRow } from '../components/AddItemRow'
 import { CategorySection } from '../components/CategorySection'
-import { ShowUncheckedRow } from '../components/ShowUncheckedRow'
 import { FloatingAddButton } from '../components/FloatingAddButton'
+import { HeaderBar } from '../components/HeaderBar'
 import { PageLayout } from '../components/PageLayout'
+import { ShowUncheckedRow } from '../components/ShowUncheckedRow'
+import { Box, Typography } from '@mui/material'
 
 interface ClothingItem {
   label: string
@@ -21,12 +22,23 @@ const clothingItems: ClothingItem[] = [
   { label: 'Sweater', checked: false }
 ]
 
+const mockTrips = [
+  { id: 1, name: 'Summer Vacation', progress: 80 },
+  { id: 2, name: 'Business Trip', progress: 40 },
+  { id: 3, name: 'Weekend Getaway', progress: 60 }
+]
+
 export const PackingListPage: React.FC = () => {
   return (
     <PageLayout>
       <HeaderBar />
-      <TripInfo />
-      <AddItemRow />
+      <TripName name={mockTrips[0].name} />
+      <Typography color="text.secondary" sx={{ mt: 1 }}>
+        Paris · Jul 15 – Jul 20
+      </Typography>
+      <Box sx={{ mt: 1 }}>
+        <AddItemRow />
+      </Box>
       <CategorySection
         title="Clothing"
         count={3}

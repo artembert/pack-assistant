@@ -6,9 +6,7 @@ export function TripInfo() {
       <Typography variant="h4" fontWeight="bold" gutterBottom>
         Business Trip
       </Typography>
-      <Typography color="text.secondary" gutterBottom>
-        Berlin · Jul 15 – Jul 20
-      </Typography>
+      
     </>
   )
 }
