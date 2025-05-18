@@ -9,7 +9,7 @@ export interface ItemListProps {
 
 export function ItemList({ items, onCheck }: ItemListProps) {
   return (
-    <List dense>
+    <List sx={{ p: 0 }} dense>
       {items.map((item) => (
         <ItemRow key={item.id} item={item} onCheck={onCheck} />
       ))}
