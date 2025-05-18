@@ -27,7 +27,7 @@ interface CreativeTripNameProps {
   name: string
 }
 
-export function CreativeTripName({ name }: CreativeTripNameProps) {
+export function TripName({ name }: CreativeTripNameProps) {
   // Memoize the random styles so they only change when name changes
   const charStyles = useMemo(() => {
     return name
@@ -62,8 +62,4 @@ export function CreativeTripName({ name }: CreativeTripNameProps) {
       })}
     </Typography>
   )
-}
-
-CreativeTripName.propTypes = {
-  name: PropTypes.string.isRequired
 }

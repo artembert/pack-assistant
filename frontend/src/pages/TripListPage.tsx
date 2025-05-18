@@ -7,7 +7,7 @@ import {
   Fab
 } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
-import { CreativeTripName } from '../components/CreativeTripName'
+import { TripName } from '../components/TripName'
 import { Link } from 'react-router-dom'
 import { PageLayout } from '../components/PageLayout'
 
@@ -37,7 +37,7 @@ export function TripListPage() {
               to={`/trip/${trip.id}`}
               style={{ textDecoration: 'none', width: '100%' }}
             >
-              <CreativeTripName name={trip.name} />
+              <TripName name={trip.name} />
             </Link>
             <Box sx={{ width: '100%', mt: 1 }}>
               <LinearProgress variant="determinate" value={trip.progress} />
