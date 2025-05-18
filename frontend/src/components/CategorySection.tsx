@@ -1,8 +1,23 @@
 import { Box, Typography, IconButton } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { ItemList } from './ItemList'
+import { PackingItem } from 'entities/item'
 
-export function CategorySection({ title, count, total, items }) {
+export interface CategorySectionProps {
+  title: string
+  count: number
+  total: number
+  items: PackingItem[]
+  onCheck: (item: PackingItem) => void
+}
+
+export function CategorySection({
+  title,
+  count,
+  total,
+  items,
+  onCheck
+}: CategorySectionProps) {
   return (
     <Box sx={{ mt: 2 }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
@@ -16,7 +31,7 @@ export function CategorySection({ title, count, total, items }) {
           <ExpandMoreIcon />
         </IconButton>
       </Box>
-      {items && <ItemList items={items} />}
+      {items && <ItemList items={items} onCheck={onCheck} />}
     </Box>
   )
 }

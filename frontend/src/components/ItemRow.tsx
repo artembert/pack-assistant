@@ -5,12 +5,23 @@ import {
   ListItemText,
   Typography
 } from '@mui/material'
+import { PackingItem } from 'entities/item'
 
-export function ItemRow({ label, checked, recommended }) {
+export interface ItemRowProps {
+  item: PackingItem
+  onCheck: (item: PackingItem) => void
+}
+
+export function ItemRow({ item, onCheck }: ItemRowProps) {
+  const { label, checked, recommended } = item
   return (
     <ListItem disablePadding>
       <ListItemIcon>
-        <Checkbox checked={checked} sx={{ color: '#3b3561' }} />
+        <Checkbox
+          checked={checked}
+          sx={{ color: '#3b3561' }}
+          onChange={() => onCheck(item)}
+        />
       </ListItemIcon>
       <ListItemText
         primary={

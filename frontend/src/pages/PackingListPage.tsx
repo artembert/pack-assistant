@@ -6,20 +6,15 @@ import { HeaderBar } from '../components/HeaderBar'
 import { PageLayout } from '../components/PageLayout'
 import { ShowUncheckedRow } from '../components/ShowUncheckedRow'
 import { Box, Typography } from '@mui/material'
+import { PackingItem } from 'entities/item'
 
-interface ClothingItem {
-  label: string
-  checked: boolean
-  recommended?: boolean
-}
-
-const clothingItems: ClothingItem[] = [
-  { label: 'Suit', checked: true },
-  { label: 'Dress shirt', checked: false },
-  { label: 'Trousers', checked: true, recommended: true },
-  { label: 'Socks', checked: true },
-  { label: 'Belt', checked: true },
-  { label: 'Sweater', checked: false }
+const clothingItems: PackingItem[] = [
+  { id: '1', label: 'Suit', checked: true },
+  { id: '2', label: 'Dress shirt', checked: false },
+  { id: '3', label: 'Trousers', checked: true, recommended: true },
+  { id: '4', label: 'Socks', checked: true },
+  { id: '5', label: 'Belt', checked: true },
+  { id: '6', label: 'Sweater', checked: false }
 ]
 
 const mockTrips = [
@@ -44,9 +39,22 @@ export const PackingListPage: React.FC = () => {
         count={3}
         total={6}
         items={clothingItems}
+        onCheck={() => {}}
       />
-      <CategorySection title="Toiletries" count={1} total={4} items={[]} />
-      <CategorySection title="Electronics" count={0} total={2} items={[]} />
+      <CategorySection
+        title="Toiletries"
+        count={1}
+        total={4}
+        items={[]}
+        onCheck={() => {}}
+      />
+      <CategorySection
+        title="Electronics"
+        count={0}
+        total={2}
+        items={[]}
+        onCheck={() => {}}
+      />
       <ShowUncheckedRow />
       <FloatingAddButton />
     </PageLayout>
