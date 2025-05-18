@@ -9,6 +9,7 @@ import {
 import AddIcon from '@mui/icons-material/Add'
 import { CreativeTripName } from '../components/CreativeTripName'
 import { Link } from 'react-router-dom'
+import { PageLayout } from '../components/PageLayout'
 
 const mockTrips = [
   { id: 1, name: 'Summer Vacation', progress: 80 },
@@ -18,30 +19,16 @@ const mockTrips = [
 
 export function TripListPage() {
   return (
-    <Box
-      sx={{
-        maxWidth: 375,
-        mx: 'auto',
-        my: 4,
-        p: 2,
-        borderRadius: 4,
-        boxShadow: 3,
-        bgcolor: '#fff',
-        minHeight: '90vh',
-        position: 'relative'
-      }}
-    >
-      {/* <Box sx={{ p: 3, position: 'relative', minHeight: '100vh' }}> */}
+    <PageLayout>
       <Typography variant="h4" gutterBottom>
         My Trips
       </Typography>
-      <List>
+      <List sx={{ display: 'grid', gap: 2 }}>
         {mockTrips.map((trip) => (
           <ListItem
             key={trip.id}
             sx={{
               p: 0,
-              my: 3,
               flexDirection: 'column',
               alignItems: 'flex-start'
             }}
@@ -68,6 +55,6 @@ export function TripListPage() {
       >
         <AddIcon />
       </Fab>
-    </Box>
+    </PageLayout>
   )
 }

@@ -1,10 +1,10 @@
-import { Box } from '@mui/material'
 import { HeaderBar } from '../components/HeaderBar'
 import { TripInfo } from '../components/TripInfo'
 import { AddItemRow } from '../components/AddItemRow'
 import { CategorySection } from '../components/CategorySection'
 import { ShowUncheckedRow } from '../components/ShowUncheckedRow'
 import { FloatingAddButton } from '../components/FloatingAddButton'
+import { PageLayout } from '../components/PageLayout'
 
 interface ClothingItem {
   label: string
@@ -23,19 +23,7 @@ const clothingItems: ClothingItem[] = [
 
 export const PackingListPage: React.FC = () => {
   return (
-    <Box
-      sx={{
-        maxWidth: 375,
-        mx: 'auto',
-        my: 4,
-        p: 2,
-        borderRadius: 4,
-        boxShadow: 3,
-        bgcolor: '#fff',
-        minHeight: '90vh',
-        position: 'relative'
-      }}
-    >
+    <PageLayout>
       <HeaderBar />
       <TripInfo />
       <AddItemRow />
@@ -49,6 +37,6 @@ export const PackingListPage: React.FC = () => {
       <CategorySection title="Electronics" count={0} total={2} items={[]} />
       <ShowUncheckedRow />
       <FloatingAddButton />
-    </Box>
+    </PageLayout>
   )
 }
