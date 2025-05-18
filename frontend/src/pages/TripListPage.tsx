@@ -37,7 +37,7 @@ export function TripListPage() {
               to={`/trip/${trip.id}`}
               style={{ textDecoration: 'none', width: '100%' }}
             >
-              <TripName name={trip.name} />
+              <TripName name={trip.name} interactive />
             </Link>
             <Box sx={{ width: '100%', mt: 1 }}>
               <LinearProgress variant="determinate" value={trip.progress} />

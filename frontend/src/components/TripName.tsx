@@ -24,10 +24,11 @@ const getRandomStyle = (): React.CSSProperties => {
 }
 
 interface CreativeTripNameProps {
-  name: string
+  name: string,
+  interactive?: boolean
 }
 
-export function TripName({ name }: CreativeTripNameProps) {
+export function TripName({ name, interactive = false }: CreativeTripNameProps) {
   // Memoize the random styles so they only change when name changes
   const charStyles = useMemo(() => {
     return name
@@ -39,7 +40,6 @@ export function TripName({ name }: CreativeTripNameProps) {
     <Typography
       component="div"
       sx={{
-        fontFamily: 'Roboto Flex, sans-serif',
         fontSize: 48,
         color: 'primary.main',
         width: '100%',
@@ -48,7 +48,14 @@ export function TripName({ name }: CreativeTripNameProps) {
         letterSpacing: -1,
         display: 'flex',
         justifyContent: 'flex-start',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        transition: 'opacity 0.2s cubic-bezier(0.05, 0.7, 0.1, 1.0)',
+        ...(interactive && {
+          '&:hover': {
+            opacity: 0.7,
+            cursor: 'pointer'
+          }
+        })
       }}
     >
       {name.split('').map((char, i) => {
