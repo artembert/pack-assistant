@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PackAssistantApplication<pack-assistant>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.packassistant.packassistant.PackAssistantApplication",
+            "projectName": "pack-assistant",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-PackAssistantApplication<backend>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.packassistant.packassistant.PackAssistantApplication",
+            "projectName": "backend",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
