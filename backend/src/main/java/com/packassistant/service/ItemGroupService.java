@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.packassistant.entity.ItemGroup;
 import com.packassistant.entity.Trip;
+import com.packassistant.exception.ItemGroupNotFoundException;
+import com.packassistant.exception.TripNotFoundException;
 import com.packassistant.repository.ItemGroupRepository;
 import com.packassistant.repository.TripRepository;
 
@@ -26,13 +28,13 @@ public class ItemGroupService {
 
     public ItemGroup findById(UUID id) {
         return itemGroupRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("ItemGroup not found with id: " + id));
+                .orElseThrow(() -> new ItemGroupNotFoundException(id));
     }
 
     @Transactional
     public ItemGroup create(UUID tripId, ItemGroup itemGroup) {
         Trip trip = tripRepository.findById(tripId)
-                .orElseThrow(() -> new RuntimeException("Trip not found with id: " + tripId));
+                .orElseThrow(() -> new TripNotFoundException(tripId));
         itemGroup.setTrip(trip);
         return itemGroupRepository.save(itemGroup);
     }
@@ -46,18 +48,30 @@ public class ItemGroupService {
 
     @Transactional
     public void delete(UUID id) {
+        if (!itemGroupRepository.existsById(id)) {
+            throw new ItemGroupNotFoundException(id);
+        }
         itemGroupRepository.deleteById(id);
     }
 
     public List<ItemGroup> findByTripId(UUID tripId) {
+        if (!tripRepository.existsById(tripId)) {
+            throw new TripNotFoundException(tripId);
+        }
         return itemGroupRepository.findByTripId(tripId);
     }
 
     public List<ItemGroup> findAllByTripIdOrderByName(UUID tripId) {
+        if (!tripRepository.existsById(tripId)) {
+            throw new TripNotFoundException(tripId);
+        }
         return itemGroupRepository.findAllByTripIdOrderByName(tripId);
     }
 
     public long countByTripId(UUID tripId) {
+        if (!tripRepository.existsById(tripId)) {
+            throw new TripNotFoundException(tripId);
+        }
         return itemGroupRepository.countByTripId(tripId);
     }
 
