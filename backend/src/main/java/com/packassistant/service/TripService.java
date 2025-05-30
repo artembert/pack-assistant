@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.packassistant.entity.Trip;
+import com.packassistant.exception.TripNotFoundException;
 import com.packassistant.repository.TripRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class TripService {
 
     public Trip findById(UUID id) {
         return tripRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Trip not found with id: " + id));
+                .orElseThrow(() -> new TripNotFoundException(id));
     }
 
     @Transactional
@@ -44,13 +45,15 @@ public class TripService {
 
     @Transactional
     public void delete(UUID id) {
+        if (!tripRepository.existsById(id)) {
+            throw new TripNotFoundException(id);
+        }
         tripRepository.deleteById(id);
     }
 
     public List<Trip> findByDestination(String destination) {
         return tripRepository.findByDestination(destination);
     }
-
 
     public List<Trip> searchByName(String name) {
         return tripRepository.findByNameContainingIgnoreCase(name);

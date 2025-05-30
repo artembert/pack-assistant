@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.packassistant.entity.Item;
 import com.packassistant.entity.ItemGroup;
+import com.packassistant.exception.ItemGroupNotFoundException;
+import com.packassistant.exception.ItemNotFoundException;
 import com.packassistant.repository.ItemGroupRepository;
 import com.packassistant.repository.ItemRepository;
 
@@ -26,13 +28,13 @@ public class ItemService {
 
     public Item findById(UUID id) {
         return itemRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Item not found with id: " + id));
+                .orElseThrow(() -> new ItemNotFoundException(id));
     }
 
     @Transactional
     public Item create(UUID itemGroupId, Item item) {
         ItemGroup itemGroup = itemGroupRepository.findById(itemGroupId)
-                .orElseThrow(() -> new RuntimeException("ItemGroup not found with id: " + itemGroupId));
+                .orElseThrow(() -> new ItemGroupNotFoundException(itemGroupId));
         item.setItemGroup(itemGroup);
         return itemRepository.save(item);
     }
@@ -50,6 +52,9 @@ public class ItemService {
 
     @Transactional
     public void delete(UUID id) {
+        if (!itemRepository.existsById(id)) {
+            throw new ItemNotFoundException(id);
+        }
         itemRepository.deleteById(id);
     }
 
@@ -61,6 +66,9 @@ public class ItemService {
     }
 
     public List<Item> findByItemGroupId(UUID itemGroupId) {
+        if (!itemGroupRepository.existsById(itemGroupId)) {
+            throw new ItemGroupNotFoundException(itemGroupId);
+        }
         return itemRepository.findByItemGroupId(itemGroupId);
     }
 
