@@ -1,8 +1,105 @@
+scalar Date
+
 type Query {
-    shows(titleFilter: String): [Show]
+    # Trip queries
+    trips: [Trip!]!
+    trip(id: ID!): Trip
+
+    # ItemGroup queries
+    itemGroups(tripId: ID!): [ItemGroup!]!
+    itemGroup(id: ID!): ItemGroup
+
+    # Item queries
+    items(itemGroupId: ID!): [Item!]!
+    item(id: ID!): Item
 }
 
-type Show {
-    title: String
-    releaseYear: Int
+type Mutation {
+    # Trip mutations
+    createTrip(input: CreateTripInput!): Trip!
+    updateTrip(id: ID!, input: UpdateTripInput!): Trip!
+    deleteTrip(id: ID!): Boolean!
+
+    # ItemGroup mutations
+    createItemGroup(input: CreateItemGroupInput!): ItemGroup!
+    updateItemGroup(id: ID!, input: UpdateItemGroupInput!): ItemGroup!
+    deleteItemGroup(id: ID!): Boolean!
+
+    # Item mutations
+    createItem(input: CreateItemInput!): Item!
+    updateItem(id: ID!, input: UpdateItemInput!): Item!
+    deleteItem(id: ID!): Boolean!
+    toggleItemPacked(id: ID!): Item!
+}
+
+# Types
+type Trip {
+    id: ID!
+    name: String!
+    destination: String
+    startDate: Date
+    endDate: Date
+    type: String
+    itemGroups: [ItemGroup!]!
+}
+
+type ItemGroup {
+    id: ID!
+    name: String!
+    tripId: ID!
+    items: [Item!]!
+    packedCount: Int!
+    totalCount: Int!
+}
+
+type Item {
+    id: ID!
+    name: String!
+    quantity: Int!
+    packed: Boolean!
+    recommended: Boolean
+    notes: String
+    itemGroupId: ID!
+}
+
+# Input Types
+input CreateTripInput {
+    name: String!
+    destination: String
+    startDate: Date
+    endDate: Date
+    type: String
+}
+
+input UpdateTripInput {
+    name: String
+    destination: String
+    startDate: Date
+    endDate: Date
+    type: String
+}
+
+input CreateItemGroupInput {
+    name: String!
+    tripId: ID!
+}
+
+input UpdateItemGroupInput {
+    name: String!
+}
+
+input CreateItemInput {
+    name: String!
+    quantity: Int!
+    recommended: Boolean
+    notes: String
+    itemGroupId: ID!
+}
+
+input UpdateItemInput {
+    name: String
+    quantity: Int
+    packed: Boolean
+    recommended: Boolean
+    notes: String
 }
