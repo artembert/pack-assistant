@@ -34,9 +34,10 @@ type Mutation {
 type Trip {
     id: ID!
     name: String!
-    description: String
-    startDate: String!
-    endDate: String!
+    destination: String!
+    type: String!
+    startDate: String
+    endDate: String
     createdAt: String!
     updatedAt: String!
 }
