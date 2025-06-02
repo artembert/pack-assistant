@@ -8,6 +8,8 @@ import {
 } from '@mui/material'
 import { PackingItem } from 'entities/item'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+import { useMutation } from '@apollo/client'
+import { UpdateItem } from 'graphql/items'
 
 export interface ItemRowProps {
   item: PackingItem
@@ -15,14 +17,36 @@ export interface ItemRowProps {
 }
 
 export function ItemRow({ item, onCheck }: ItemRowProps) {
-  const { name, packed, recommended } = item
+  const { id, name, packed, recommended, notes, quantity } = item
+  const [updateItem] = useMutation(UpdateItem)
+
+  const handleCheck = async () => {
+    try {
+      await updateItem({
+        variables: {
+          id,
+          input: {
+            name,
+            quantity,
+            recommended,
+            notes,
+            packed: !packed
+          }
+        }
+      })
+      onCheck(item)
+    } catch (error) {
+      console.error('Failed to update item:', error)
+    }
+  }
+
   return (
     <ListItem disablePadding>
       <ListItemIcon>
         <Checkbox
           checked={packed}
           sx={{ color: '#3b3561' }}
-          onChange={() => onCheck(item)}
+          onChange={handleCheck}
         />
       </ListItemIcon>
       <ListItemText

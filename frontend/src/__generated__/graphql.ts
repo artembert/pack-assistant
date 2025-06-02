@@ -178,6 +178,24 @@ export type UpdateTripInput = {
   type?: InputMaybe<Scalars['String']['input']>
 }
 
+export type UpdateItemMutationVariables = Exact<{
+  id: Scalars['ID']['input']
+  input: UpdateItemInput
+}>
+
+export type UpdateItemMutation = {
+  __typename?: 'Mutation'
+  updateItem: {
+    __typename?: 'Item'
+    id: string
+    name: string
+    quantity: number
+    packed: boolean
+    recommended?: boolean | null
+    notes?: string | null
+  }
+}
+
 export type GetTripsQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetTripsQuery = {
@@ -228,6 +246,75 @@ export type GetTripQuery = {
   } | null
 }
 
+export const UpdateItemDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'UpdateItem' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'ID' } }
+          }
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'input' }
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'UpdateItemInput' }
+            }
+          }
+        }
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'updateItem' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } }
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'input' }
+                }
+              }
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'quantity' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'packed' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'recommended' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'notes' } }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<UpdateItemMutation, UpdateItemMutationVariables>
 export const GetTripsDocument = {
   kind: 'Document',
   definitions: [
