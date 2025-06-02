@@ -11,6 +11,8 @@ import { HeaderBar } from 'components/HeaderBar'
 import { Link } from 'react-router-dom'
 import { PageLayout } from '../components/PageLayout'
 import { TripName } from '../components/TripName'
+import { useQuery } from '@apollo/client'
+import { GetTrips } from 'graphql/trips'
 
 const mockTrips = [
   { id: 1, name: 'Summer Vacation', progress: 80 },
@@ -19,6 +21,12 @@ const mockTrips = [
 ]
 
 export function TripListPage() {
+  const { loading, error, data } = useQuery(GetTrips)
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error : {error.message}</p>
+  console.log(data)
+
   return (
     <PageLayout>
       <HeaderBar title="My Trips" />
