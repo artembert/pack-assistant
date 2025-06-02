@@ -12,3 +12,17 @@ export const UpdateItem = gql`
     }
   }
 `
+
+export const CreateItem = gql`
+  mutation CreateItem($input: CreateItemInput!) {
+    createItem(input: $input) {
+      id
+      name
+      quantity
+      packed
+      recommended
+      notes
+      itemGroupId
+    }
+  }
+`
