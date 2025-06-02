@@ -16,8 +16,8 @@ export const GetTrips = gql`
 `
 
 export const GetTripById = gql`
-  query GetTrip($id: ID!) {
-    trip(id: $id) {
+  query GetTrip($input: TripFilterInput!) {
+    trip(input: $input) {
       id
       name
       destination

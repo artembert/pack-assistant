@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import { TripName } from 'components/TripName'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AddItemRow } from '../components/AddItemRow'
@@ -6,10 +6,10 @@ import { CategorySection } from '../components/CategorySection'
 import { FloatingAddButton } from '../components/FloatingAddButton'
 import { HeaderBar } from '../components/HeaderBar'
 import { PageLayout } from '../components/PageLayout'
-import { ShowUncheckedRow } from '../components/ShowUncheckedRow'
-import { GetTripQuery } from '__generated__/graphql'
+import { GetTripQuery, QueryTripArgs } from '__generated__/graphql'
 import { GetTripById } from 'graphql/trips'
 import { useQuery } from '@apollo/client'
+import { useState } from 'react'
 
 const formatDayMonth = (date: string) => {
   return Intl.DateTimeFormat('en-US', {
@@ -19,11 +19,15 @@ const formatDayMonth = (date: string) => {
 }
 
 export const PackingListPage: React.FC = () => {
+  const [showUnchecked, setShowUnchecked] = useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
-  const { loading, error, data } = useQuery<GetTripQuery>(GetTripById, {
-    variables: { id: id }
-  })
+  const { loading, error, data } = useQuery<GetTripQuery, QueryTripArgs>(
+    GetTripById,
+    {
+      variables: { input: { id: id!, showUnchecked: showUnchecked } }
+    }
+  )
 
   return (
     <PageLayout>
@@ -40,8 +44,15 @@ export const PackingListPage: React.FC = () => {
             {data.trip.startDate ? formatDayMonth(data.trip.startDate) : ''} –{' '}
             {data.trip.endDate ? formatDayMonth(data.trip.endDate) : ''}
           </Typography>
-          <Box sx={{ mt: 2 }}>
+          <Box display="flex" justifyContent="space-between" sx={{ mt: 2 }}>
             <AddItemRow />
+            <Button
+              variant="text"
+              color="primary"
+              onClick={() => setShowUnchecked(!showUnchecked)}
+            >
+              {showUnchecked ? 'Show checked' : 'Show unchecked'}
+            </Button>
           </Box>
           <Box sx={{ mt: 1 }}>
             {data.trip.itemGroups.map((itemGroup) => (
@@ -55,7 +66,6 @@ export const PackingListPage: React.FC = () => {
               />
             ))}
           </Box>
-          <ShowUncheckedRow />
         </>
       )}
 
