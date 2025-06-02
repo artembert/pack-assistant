@@ -14,10 +14,13 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
+  '\n  mutation UpdateItem($id: ID!, $input: UpdateItemInput!) {\n    updateItem(id: $id, input: $input) {\n      id\n      name\n      quantity\n      packed\n      recommended\n      notes\n    }\n  }\n': typeof types.UpdateItemDocument
   '\n  query GetTrips {\n    trips {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      done\n      total\n    }\n  }\n': typeof types.GetTripsDocument
   '\n  query GetTrip($input: TripFilterInput!) {\n    trip(input: $input) {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      itemGroups {\n        id\n        name\n        total\n        done\n        items {\n          id\n          name\n          quantity\n          packed\n          recommended\n          notes\n        }\n      }\n    }\n  }\n': typeof types.GetTripDocument
 }
 const documents: Documents = {
+  '\n  mutation UpdateItem($id: ID!, $input: UpdateItemInput!) {\n    updateItem(id: $id, input: $input) {\n      id\n      name\n      quantity\n      packed\n      recommended\n      notes\n    }\n  }\n':
+    types.UpdateItemDocument,
   '\n  query GetTrips {\n    trips {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      done\n      total\n    }\n  }\n':
     types.GetTripsDocument,
   '\n  query GetTrip($input: TripFilterInput!) {\n    trip(input: $input) {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      itemGroups {\n        id\n        name\n        total\n        done\n        items {\n          id\n          name\n          quantity\n          packed\n          recommended\n          notes\n        }\n      }\n    }\n  }\n':
@@ -38,6 +41,12 @@ const documents: Documents = {
  */
 export function gql(source: string): unknown
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: '\n  mutation UpdateItem($id: ID!, $input: UpdateItemInput!) {\n    updateItem(id: $id, input: $input) {\n      id\n      name\n      quantity\n      packed\n      recommended\n      notes\n    }\n  }\n'
+): (typeof documents)['\n  mutation UpdateItem($id: ID!, $input: UpdateItemInput!) {\n    updateItem(id: $id, input: $input) {\n      id\n      name\n      quantity\n      packed\n      recommended\n      notes\n    }\n  }\n']
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

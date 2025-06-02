@@ -179,6 +179,24 @@ export type UpdateTripInput = {
   type?: InputMaybe<Scalars['String']['input']>
 }
 
+export type UpdateItemMutationVariables = Exact<{
+  id: Scalars['ID']['input']
+  input: UpdateItemInput
+}>
+
+export type UpdateItemMutation = {
+  __typename?: 'Mutation'
+  updateItem: {
+    __typename?: 'Item'
+    id: string
+    name: string
+    quantity: number
+    packed: boolean
+    recommended?: boolean | null
+    notes?: string | null
+  }
+}
+
 export type GetTripsQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetTripsQuery = {
@@ -229,6 +247,61 @@ export type GetTripQuery = {
   } | null
 }
 
+export const UpdateItemDocument = gql`
+  mutation UpdateItem($id: ID!, $input: UpdateItemInput!) {
+    updateItem(id: $id, input: $input) {
+      id
+      name
+      quantity
+      packed
+      recommended
+      notes
+    }
+  }
+`
+export type UpdateItemMutationFn = Apollo.MutationFunction<
+  UpdateItemMutation,
+  UpdateItemMutationVariables
+>
+
+/**
+ * __useUpdateItemMutation__
+ *
+ * To run a mutation, you first call `useUpdateItemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateItemMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateItemMutation, { data, loading, error }] = useUpdateItemMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateItemMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateItemMutation,
+    UpdateItemMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<UpdateItemMutation, UpdateItemMutationVariables>(
+    UpdateItemDocument,
+    options
+  )
+}
+export type UpdateItemMutationHookResult = ReturnType<
+  typeof useUpdateItemMutation
+>
+export type UpdateItemMutationResult = Apollo.MutationResult<UpdateItemMutation>
+export type UpdateItemMutationOptions = Apollo.BaseMutationOptions<
+  UpdateItemMutation,
+  UpdateItemMutationVariables
+>
 export const GetTripsDocument = gql`
   query GetTrips {
     trips {
