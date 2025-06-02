@@ -24,7 +24,7 @@ export function TripItem({ id, name, done, total }: TripItemProps) {
       <Box sx={{ width: '100%', mt: 1 }}>
         <LinearProgress variant="determinate" value={progress} />
         <Typography variant="caption" color="text.secondary">
-          {progress}% packed
+          {progress.toFixed(0)}% packed
         </Typography>
       </Box>
     </ListItem>
