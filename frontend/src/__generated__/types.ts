@@ -75,23 +75,15 @@ export type ItemGroup = {
 export type Mutation = {
   __typename?: 'Mutation'
   createItem: Item
-  createItemGroup: ItemGroup
   createTrip: Trip
   deleteItem: Scalars['Boolean']['output']
-  deleteItemGroup: Scalars['Boolean']['output']
   deleteTrip: Scalars['Boolean']['output']
-  toggleItemPacked: Item
   updateItem: Item
-  updateItemGroup: ItemGroup
   updateTrip: Trip
 }
 
 export type MutationCreateItemArgs = {
   input: CreateItemInput
-}
-
-export type MutationCreateItemGroupArgs = {
-  input: CreateItemGroupInput
 }
 
 export type MutationCreateTripArgs = {
@@ -102,26 +94,13 @@ export type MutationDeleteItemArgs = {
   id: Scalars['ID']['input']
 }
 
-export type MutationDeleteItemGroupArgs = {
-  id: Scalars['ID']['input']
-}
-
 export type MutationDeleteTripArgs = {
-  id: Scalars['ID']['input']
-}
-
-export type MutationToggleItemPackedArgs = {
   id: Scalars['ID']['input']
 }
 
 export type MutationUpdateItemArgs = {
   id: Scalars['ID']['input']
   input: UpdateItemInput
-}
-
-export type MutationUpdateItemGroupArgs = {
-  id: Scalars['ID']['input']
-  input: UpdateItemGroupInput
 }
 
 export type MutationUpdateTripArgs = {
@@ -228,6 +207,8 @@ export type GetTripQuery = {
     type: string
     startDate?: string | null
     endDate?: string | null
+    done: number
+    total: number
     itemGroups: Array<{
       __typename?: 'ItemGroup'
       id: string
@@ -387,6 +368,8 @@ export const GetTripDocument = gql`
       type
       startDate
       endDate
+      done
+      total
       itemGroups {
         id
         name

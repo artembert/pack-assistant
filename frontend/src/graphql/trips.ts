@@ -24,6 +24,8 @@ export const GetTripById = gql`
       type
       startDate
       endDate
+      done
+      total
       itemGroups {
         id
         name
