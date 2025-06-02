@@ -1,12 +1,12 @@
-import { Box, ListItem, LinearProgress, Typography } from '@mui/material'
+import { ListItem } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { TripName } from './TripName'
 import { Trip } from '../__generated__/graphql'
+import { PackingProgress } from './PackingProgress'
 
 type TripItemProps = Pick<Trip, 'id' | 'name' | 'done' | 'total'>
 
 export function TripItem({ id, name, done, total }: TripItemProps) {
-  const progress = total > 0 ? (done / total) * 100 : 0
   return (
     <ListItem
       sx={{
@@ -21,12 +21,7 @@ export function TripItem({ id, name, done, total }: TripItemProps) {
       >
         <TripName name={name} interactive />
       </Link>
-      <Box sx={{ width: '100%', mt: 1 }}>
-        <LinearProgress variant="determinate" value={progress} />
-        <Typography variant="caption" color="text.secondary">
-          {progress.toFixed(0)}% packed
-        </Typography>
-      </Box>
+      <PackingProgress total={total} packed={done} />
     </ListItem>
   )
 }
