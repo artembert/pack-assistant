@@ -1,30 +1,34 @@
 package com.packassistant.service;
 
+import com.packassistant.entity.Item;
+import com.packassistant.entity.ItemGroup;
+import com.packassistant.entity.Trip;
+import com.packassistant.exception.TripNotFoundException;
+import com.packassistant.repository.TripRepository;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.packassistant.entity.Trip;
-import com.packassistant.exception.TripNotFoundException;
-import com.packassistant.repository.TripRepository;
-
-import lombok.RequiredArgsConstructor;
-
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class TripService {
     private final TripRepository tripRepository;
 
     public List<Trip> findAll() {
-        return tripRepository.findAll();
+        return tripRepository.findAll().stream().map(this::calculateTripProgress).collect(Collectors.toList());
     }
 
     public Trip findById(UUID id) {
-        return tripRepository.findById(id)
-                .orElseThrow(() -> new TripNotFoundException(id));
+        var item = tripRepository.findById(id)
+            .orElseThrow(() -> new TripNotFoundException(id));
+        return calculateTripProgress(item);
     }
 
     @Transactional
@@ -56,5 +60,16 @@ public class TripService {
 
     public List<Trip> searchByName(String name) {
         return tripRepository.findByNameContainingIgnoreCase(name);
+    }
+
+    private Trip calculateTripProgress(Trip trip) {
+        if (trip.getItemGroups() == null) {
+            trip.setProgress(0, 0);
+            return trip;
+        }
+        var goods = trip.getItemGroups().stream().map(ItemGroup::getItems).flatMap(List::stream).toList();
+        trip.setProgress(goods.stream().filter(Item::getPacked).toList().size(), goods.size());
+
+        return trip;
     }
 }
