@@ -31,6 +31,8 @@ type Trip {
     createdAt: String!
     updatedAt: String!
     itemGroups: [ItemGroup!]!
+    done: Int!
+    total: Int!
 }
 
 type ItemGroup {
