@@ -17,11 +17,13 @@ import java.util.UUID;
 public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "name",  nullable = false)
     private String name;
 
+    @Column(name = "destination", nullable = false)
     private String destination;
 
     @Column(name = "start_date")
@@ -30,6 +32,7 @@ public class Trip {
     @Column(name = "end_date")
     private LocalDate endDate;
 
+    @Column(name = "type", nullable = false)
     private String type;
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
