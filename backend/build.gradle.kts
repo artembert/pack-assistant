@@ -29,9 +29,8 @@ extra["netflixDgsVersion"] = "10.1.2"
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
-    implementation("org.springframework.boot:spring-boot-starter-graphql")
     implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-database-postgresql")
@@ -53,7 +52,7 @@ dependencyManagement {
 }
 
 tasks.generateJava {
-    schemaPaths.add("${projectDir}/src/main/resources/graphql-client")
+    schemaPaths.add("${projectDir}/src/main/resources/schema")
     packageName = "com.packassistant.packassistant.codegen"
     generateClient = true
 }
