@@ -23,12 +23,12 @@ export const PackingListPage: React.FC = () => {
   const [showUnchecked, setShowUnchecked] = useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
-  const { loading, error, data } = useQuery<GetTripQuery, QueryTripArgs>(
-    GetTripById,
-    {
-      variables: { input: { id: id!, showUnchecked: showUnchecked } }
-    }
-  )
+  const { loading, error, data, refetch } = useQuery<
+    GetTripQuery,
+    QueryTripArgs
+  >(GetTripById, {
+    variables: { input: { id: id!, showUnchecked: showUnchecked } }
+  })
 
   return (
     <PageLayout>
@@ -64,7 +64,7 @@ export const PackingListPage: React.FC = () => {
                 count={itemGroup.done}
                 total={itemGroup.total}
                 items={itemGroup.items}
-                onCheck={() => {}}
+                onCheck={() => refetch()}
               />
             ))}
           </Box>
