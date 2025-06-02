@@ -1,6 +1,3 @@
-export type PackingItem = {
-  id: string
-  label: string
-  recommended?: boolean
-  checked?: boolean
-}
+import { Item } from '__generated__/types'
+
+export type PackingItem = Pick<Item, 'id' | 'name' | 'packed' | 'recommended'>
