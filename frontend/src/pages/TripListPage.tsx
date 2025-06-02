@@ -8,13 +8,12 @@ import { TripItem } from '../components/TripItem'
 import { GetTripsQuery } from '__generated__/graphql'
 
 export function TripListPage() {
-  const { loading, error, data } = useQuery<GetTripsQuery>(GetTrips)
+  const { error, data } = useQuery<GetTripsQuery>(GetTrips)
 
   return (
     <PageLayout>
       <HeaderBar title="My Trips" />
 
-      {loading && <p>Loading trips...</p>}
       {error && <p>Error loading trips: {error?.message}</p>}
       {data?.trips && (
         <List sx={{ display: 'grid', mt: 2, p: 0, gap: 2 }}>
