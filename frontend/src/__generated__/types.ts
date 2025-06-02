@@ -64,11 +64,11 @@ export type Item = {
 
 export type ItemGroup = {
   __typename?: 'ItemGroup'
+  done: Scalars['Int']['output']
   id: Scalars['ID']['output']
   items: Array<Item>
   name: Scalars['String']['output']
-  packedCount: Scalars['Int']['output']
-  totalCount: Scalars['Int']['output']
+  total: Scalars['Int']['output']
   tripId: Scalars['ID']['output']
 }
 
@@ -205,14 +205,12 @@ export type GetTripQuery = {
     type: string
     startDate?: string | null
     endDate?: string | null
-    createdAt: string
-    updatedAt: string
     itemGroups: Array<{
       __typename?: 'ItemGroup'
       id: string
       name: string
-      packedCount: number
-      totalCount: number
+      total: number
+      done: number
       items: Array<{
         __typename?: 'Item'
         id: string
@@ -311,13 +309,11 @@ export const GetTripDocument = gql`
       type
       startDate
       endDate
-      createdAt
-      updatedAt
       itemGroups {
         id
         name
-        packedCount
-        totalCount
+        total
+        done
         items {
           id
           name
