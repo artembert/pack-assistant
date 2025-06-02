@@ -1,5 +1,3 @@
-scalar Date
-
 type Query {
     # Trip queries
     trips: [Trip!]!
@@ -37,8 +35,8 @@ type Trip {
     id: ID!
     name: String!
     destination: String
-    startDate: Date
-    endDate: Date
+    startDate: String
+    endDate: String
     type: String
     itemGroups: [ItemGroup!]!
 }
@@ -66,16 +64,16 @@ type Item {
 input CreateTripInput {
     name: String!
     destination: String
-    startDate: Date
-    endDate: Date
+    startDate: String
+    endDate: String
     type: String
 }
 
 input UpdateTripInput {
     name: String
     destination: String
-    startDate: Date
-    endDate: Date
+    startDate: String
+    endDate: String
     type: String
 }
 
