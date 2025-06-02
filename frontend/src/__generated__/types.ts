@@ -136,7 +136,7 @@ export type Query = {
 }
 
 export type QueryTripArgs = {
-  id: Scalars['ID']['input']
+  input: TripFilterInput
 }
 
 export type Trip = {
@@ -152,6 +152,11 @@ export type Trip = {
   total: Scalars['Int']['output']
   type: Scalars['String']['output']
   updatedAt: Scalars['String']['output']
+}
+
+export type TripFilterInput = {
+  id: Scalars['ID']['input']
+  showUnchecked?: InputMaybe<Scalars['Boolean']['input']>
 }
 
 export type UpdateItemGroupInput = {
@@ -192,7 +197,7 @@ export type GetTripsQuery = {
 }
 
 export type GetTripQueryVariables = Exact<{
-  id: Scalars['ID']['input']
+  input: TripFilterInput
 }>
 
 export type GetTripQuery = {
@@ -301,8 +306,8 @@ export type GetTripsQueryResult = Apollo.QueryResult<
   GetTripsQueryVariables
 >
 export const GetTripDocument = gql`
-  query GetTrip($id: ID!) {
-    trip(id: $id) {
+  query GetTrip($input: TripFilterInput!) {
+    trip(input: $input) {
       id
       name
       destination
@@ -339,7 +344,7 @@ export const GetTripDocument = gql`
  * @example
  * const { data, loading, error } = useGetTripQuery({
  *   variables: {
- *      id: // value for 'id'
+ *      input: // value for 'input'
  *   },
  * });
  */

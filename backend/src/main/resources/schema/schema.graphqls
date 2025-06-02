@@ -1,6 +1,6 @@
 type Query {
     trips: [Trip!]!
-    trip(id: ID!): Trip
+    trip(input: TripFilterInput!): Trip
 }
 
 type Mutation {
@@ -61,6 +61,11 @@ input CreateTripInput {
     startDate: String
     endDate: String
     type: String!
+}
+
+input TripFilterInput {
+    id: ID!
+    showUnchecked: Boolean
 }
 
 input UpdateTripInput {

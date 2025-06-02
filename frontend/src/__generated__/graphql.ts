@@ -135,7 +135,7 @@ export type Query = {
 }
 
 export type QueryTripArgs = {
-  id: Scalars['ID']['input']
+  input: TripFilterInput
 }
 
 export type Trip = {
@@ -151,6 +151,11 @@ export type Trip = {
   total: Scalars['Int']['output']
   type: Scalars['String']['output']
   updatedAt: Scalars['String']['output']
+}
+
+export type TripFilterInput = {
+  id: Scalars['ID']['input']
+  showUnchecked?: InputMaybe<Scalars['Boolean']['input']>
 }
 
 export type UpdateItemGroupInput = {
@@ -191,7 +196,7 @@ export type GetTripsQuery = {
 }
 
 export type GetTripQueryVariables = Exact<{
-  id: Scalars['ID']['input']
+  input: TripFilterInput
 }>
 
 export type GetTripQuery = {
@@ -265,10 +270,16 @@ export const GetTripDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'input' }
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'ID' } }
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'TripFilterInput' }
+            }
           }
         }
       ],
@@ -281,8 +292,11 @@ export const GetTripDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'id' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } }
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'input' }
+                }
               }
             ],
             selectionSet: {
