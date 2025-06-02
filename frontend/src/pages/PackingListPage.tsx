@@ -10,6 +10,7 @@ import { GetTripQuery, QueryTripArgs } from '__generated__/graphql'
 import { GetTripById } from 'graphql/trips'
 import { useQuery } from '@apollo/client'
 import { useState } from 'react'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 const formatDayMonth = (date: string) => {
   return Intl.DateTimeFormat('en-US', {
@@ -50,8 +51,9 @@ export const PackingListPage: React.FC = () => {
               variant="text"
               color="primary"
               onClick={() => setShowUnchecked(!showUnchecked)}
+              startIcon={showUnchecked ? <VisibilityOff /> : <Visibility />}
             >
-              {showUnchecked ? 'Show checked' : 'Show unchecked'}
+              {showUnchecked ? 'Hide checked' : 'Show checked'}
             </Button>
           </Box>
           <Box sx={{ mt: 1 }}>
