@@ -34,11 +34,11 @@ type Mutation {
 type Trip {
     id: ID!
     name: String!
-    destination: String
-    startDate: String
-    endDate: String
-    type: String
-    itemGroups: [ItemGroup!]!
+    description: String
+    startDate: String!
+    endDate: String!
+    createdAt: String!
+    updatedAt: String!
 }
 
 type ItemGroup {
