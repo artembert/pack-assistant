@@ -175,6 +175,24 @@ export type UpdateItemMutation = {
   }
 }
 
+export type CreateItemMutationVariables = Exact<{
+  input: CreateItemInput
+}>
+
+export type CreateItemMutation = {
+  __typename?: 'Mutation'
+  createItem: {
+    __typename?: 'Item'
+    id: string
+    name: string
+    quantity: number
+    packed: boolean
+    recommended?: boolean | null
+    notes?: string | null
+    itemGroupId: string
+  }
+}
+
 export type GetTripsQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetTripsQuery = {
@@ -296,6 +314,63 @@ export const UpdateItemDocument = {
     }
   ]
 } as unknown as DocumentNode<UpdateItemMutation, UpdateItemMutationVariables>
+export const CreateItemDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'CreateItem' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'input' }
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CreateItemInput' }
+            }
+          }
+        }
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'createItem' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'input' }
+                }
+              }
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'quantity' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'packed' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'recommended' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'notes' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'itemGroupId' } }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<CreateItemMutation, CreateItemMutationVariables>
 export const GetTripsDocument = {
   kind: 'Document',
   definitions: [

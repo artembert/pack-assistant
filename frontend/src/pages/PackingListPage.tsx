@@ -47,7 +47,10 @@ export const PackingListPage: React.FC = () => {
             {data.trip.endDate ? formatDayMonth(data.trip.endDate) : ''}
           </Typography>
           <Box display="flex" justifyContent="space-between" sx={{ mt: 2 }}>
-            <AddItemRow />
+            <AddItemRow
+              itemGroups={data.trip.itemGroups}
+              onItemCreated={() => refetch()}
+            />
             <Button
               variant="text"
               color="primary"
