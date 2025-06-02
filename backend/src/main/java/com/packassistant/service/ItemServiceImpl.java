@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional(readOnly = true) // TODO: Перенести транзакции только на отдельные нужные методы
 public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
     private final ItemGroupRepository itemGroupRepository;
@@ -81,7 +81,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<Item> findAllByTripId(UUID tripId) {
-        return itemRepository.findAllByTripId(tripId);
+        return itemRepository.findAllByItemGroupTripId(tripId);
     }
 
     @Override

@@ -17,15 +17,17 @@ public interface ItemRepository extends JpaRepository<Item, UUID> {
     
     List<Item> findByPacked(Boolean packed);
     
-    @Query("SELECT i FROM Item i WHERE i.itemGroup.trip.id = :tripId")
-    List<Item> findAllByTripId(UUID tripId);
+    List<Item> findAllByItemGroupTripId(UUID tripId);
     
+    // TODO: Rewrite
     @Query("SELECT i FROM Item i WHERE i.itemGroup.trip.id = :tripId AND i.packed = :packed")
     List<Item> findByTripIdAndPacked(UUID tripId, Boolean packed);
-    
+
+    // TODO: Rewrite
     @Query("SELECT COUNT(i) FROM Item i WHERE i.itemGroup.trip.id = :tripId")
     long countByTripId(UUID tripId);
-    
+
+    // TODO: Rewrite
     @Query("SELECT COUNT(i) FROM Item i WHERE i.itemGroup.trip.id = :tripId AND i.packed = true")
     long countPackedByTripId(UUID tripId);
 } 
