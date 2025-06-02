@@ -5,7 +5,7 @@ import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
 import java.util.List;
 
-@DgsComponent
+//@DgsComponent
 public class ShowsDataFetcher {
     private final List<Show> shows = List.of(
         new Show("Breaking Bad", 2016),
@@ -14,7 +14,7 @@ public class ShowsDataFetcher {
         new Show("The Crown", 2013)
     );
 
-    @DgsQuery
+//    @DgsQuery
     public List<Show> shows(@InputArgument String titleFilter) {
         if (titleFilter == null || titleFilter.isEmpty()) {
             return shows;
