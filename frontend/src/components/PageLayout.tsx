@@ -25,7 +25,8 @@ export function PageLayout({ children }: PageLayoutProps) {
           boxShadow: 3,
           bgcolor: '#fff',
           position: 'relative',
-          flexGrow: 1
+          flexGrow: 1,
+          overflow: 'auto'
         }}
       >
         {children}
