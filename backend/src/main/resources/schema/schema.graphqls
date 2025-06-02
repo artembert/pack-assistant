@@ -1,19 +1,9 @@
 type Query {
-    # Trip queries
     trips: [Trip!]!
     trip(id: ID!): Trip
-
-    # ItemGroup queries
-    itemGroups(tripId: ID!): [ItemGroup!]!
-    itemGroup(id: ID!): ItemGroup
-
-    # Item queries
-    items(itemGroupId: ID!): [Item!]!
-    item(id: ID!): Item
 }
 
 type Mutation {
-    # Trip mutations
     createTrip(input: CreateTripInput!): Trip!
     updateTrip(id: ID!, input: UpdateTripInput!): Trip!
     deleteTrip(id: ID!): Boolean!
@@ -40,6 +30,7 @@ type Trip {
     endDate: String
     createdAt: String!
     updatedAt: String!
+    itemGroups: [ItemGroup!]!
 }
 
 type ItemGroup {
@@ -67,7 +58,7 @@ input CreateTripInput {
     destination: String
     startDate: String
     endDate: String
-    type: String
+    type: String!
 }
 
 input UpdateTripInput {
