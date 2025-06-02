@@ -28,6 +28,8 @@ public class TripService {
     public Trip findById(UUID id) {
         var item = tripRepository.findById(id)
             .orElseThrow(() -> new TripNotFoundException(id));
+        var itemGroups = item.getItemGroups().stream().map(this::calculateItemGroupProgress).toList();
+        item.setItemGroups(itemGroups);
         return calculateTripProgress(item);
     }
 
@@ -71,5 +73,16 @@ public class TripService {
         trip.setProgress(goods.stream().filter(Item::getPacked).toList().size(), goods.size());
 
         return trip;
+    }
+
+    private ItemGroup calculateItemGroupProgress(ItemGroup itemGroup) {
+        if (itemGroup.getItems() == null) {
+            itemGroup.setProgress(0, 0);
+            return itemGroup;
+        }
+        var goods = itemGroup.getItems().stream().filter(Item::getPacked).toList();
+        itemGroup.setProgress(goods.size(), itemGroup.getItems().size());
+
+        return itemGroup;
     }
 }

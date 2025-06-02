@@ -40,8 +40,8 @@ type ItemGroup {
     name: String!
     tripId: ID!
     items: [Item!]!
-    packedCount: Int!
-    totalCount: Int!
+    done: Int!
+    total: Int!
 }
 
 type Item {
