@@ -9,6 +9,8 @@ export const GetTrips = gql`
       type
       startDate
       endDate
+      done
+      total
     }
   }
 `

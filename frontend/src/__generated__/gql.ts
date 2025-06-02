@@ -1,6 +1,6 @@
 /* eslint-disable */
-import * as types from './graphql';
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+import * as types from './graphql'
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 
 /**
  * Map of all GraphQL operations in the project.
@@ -14,13 +14,15 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-    "\n  query GetTrips {\n    trips {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      createdAt\n      updatedAt\n      itemGroups {\n        id\n        name\n        packedCount\n        totalCount\n      }\n    }\n  }\n": typeof types.GetTripsDocument,
-    "\n  query GetTrip($id: ID!) {\n    trip(id: $id) {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      createdAt\n      updatedAt\n      itemGroups {\n        id\n        name\n        packedCount\n        totalCount\n        items {\n          id\n          name\n          quantity\n          packed\n          recommended\n          notes\n        }\n      }\n    }\n  }\n": typeof types.GetTripDocument,
-};
+  '\n  query GetTrips {\n    trips {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      done\n      total\n    }\n  }\n': typeof types.GetTripsDocument
+  '\n  query GetTrip($id: ID!) {\n    trip(id: $id) {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      createdAt\n      updatedAt\n      itemGroups {\n        id\n        name\n        packedCount\n        totalCount\n        items {\n          id\n          name\n          quantity\n          packed\n          recommended\n          notes\n        }\n      }\n    }\n  }\n': typeof types.GetTripDocument
+}
 const documents: Documents = {
-    "\n  query GetTrips {\n    trips {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      createdAt\n      updatedAt\n      itemGroups {\n        id\n        name\n        packedCount\n        totalCount\n      }\n    }\n  }\n": types.GetTripsDocument,
-    "\n  query GetTrip($id: ID!) {\n    trip(id: $id) {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      createdAt\n      updatedAt\n      itemGroups {\n        id\n        name\n        packedCount\n        totalCount\n        items {\n          id\n          name\n          quantity\n          packed\n          recommended\n          notes\n        }\n      }\n    }\n  }\n": types.GetTripDocument,
-};
+  '\n  query GetTrips {\n    trips {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      done\n      total\n    }\n  }\n':
+    types.GetTripsDocument,
+  '\n  query GetTrip($id: ID!) {\n    trip(id: $id) {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      createdAt\n      updatedAt\n      itemGroups {\n        id\n        name\n        packedCount\n        totalCount\n        items {\n          id\n          name\n          quantity\n          packed\n          recommended\n          notes\n        }\n      }\n    }\n  }\n':
+    types.GetTripDocument
+}
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -34,19 +36,24 @@ const documents: Documents = {
  * The query argument is unknown!
  * Please regenerate the types.
  */
-export function gql(source: string): unknown;
+export function gql(source: string): unknown
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetTrips {\n    trips {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      createdAt\n      updatedAt\n      itemGroups {\n        id\n        name\n        packedCount\n        totalCount\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetTrips {\n    trips {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      createdAt\n      updatedAt\n      itemGroups {\n        id\n        name\n        packedCount\n        totalCount\n      }\n    }\n  }\n"];
+export function gql(
+  source: '\n  query GetTrips {\n    trips {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      done\n      total\n    }\n  }\n'
+): (typeof documents)['\n  query GetTrips {\n    trips {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      done\n      total\n    }\n  }\n']
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetTrip($id: ID!) {\n    trip(id: $id) {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      createdAt\n      updatedAt\n      itemGroups {\n        id\n        name\n        packedCount\n        totalCount\n        items {\n          id\n          name\n          quantity\n          packed\n          recommended\n          notes\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetTrip($id: ID!) {\n    trip(id: $id) {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      createdAt\n      updatedAt\n      itemGroups {\n        id\n        name\n        packedCount\n        totalCount\n        items {\n          id\n          name\n          quantity\n          packed\n          recommended\n          notes\n        }\n      }\n    }\n  }\n"];
+export function gql(
+  source: '\n  query GetTrip($id: ID!) {\n    trip(id: $id) {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      createdAt\n      updatedAt\n      itemGroups {\n        id\n        name\n        packedCount\n        totalCount\n        items {\n          id\n          name\n          quantity\n          packed\n          recommended\n          notes\n        }\n      }\n    }\n  }\n'
+): (typeof documents)['\n  query GetTrip($id: ID!) {\n    trip(id: $id) {\n      id\n      name\n      destination\n      type\n      startDate\n      endDate\n      createdAt\n      updatedAt\n      itemGroups {\n        id\n        name\n        packedCount\n        totalCount\n        items {\n          id\n          name\n          quantity\n          packed\n          recommended\n          notes\n        }\n      }\n    }\n  }\n']
 
 export function gql(source: string) {
-  return (documents as any)[source] ?? {};
+  return (documents as any)[source] ?? {}
 }
 
-export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;
+export type DocumentType<TDocumentNode extends DocumentNode<any, any>> =
+  TDocumentNode extends DocumentNode<infer TType, any> ? TType : never
