@@ -63,11 +63,11 @@ export type Item = {
 
 export type ItemGroup = {
   __typename?: 'ItemGroup'
+  done: Scalars['Int']['output']
   id: Scalars['ID']['output']
   items: Array<Item>
   name: Scalars['String']['output']
-  packedCount: Scalars['Int']['output']
-  totalCount: Scalars['Int']['output']
+  total: Scalars['Int']['output']
   tripId: Scalars['ID']['output']
 }
 
@@ -204,14 +204,12 @@ export type GetTripQuery = {
     type: string
     startDate?: string | null
     endDate?: string | null
-    createdAt: string
-    updatedAt: string
     itemGroups: Array<{
       __typename?: 'ItemGroup'
       id: string
       name: string
-      packedCount: number
-      totalCount: number
+      total: number
+      done: number
       items: Array<{
         __typename?: 'Item'
         id: string
@@ -296,8 +294,6 @@ export const GetTripDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'type' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'startDate' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'endDate' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'itemGroups' },
@@ -306,14 +302,8 @@ export const GetTripDocument = {
                     selections: [
                       { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                       { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'packedCount' }
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'totalCount' }
-                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'total' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'done' } },
                       {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'items' },
