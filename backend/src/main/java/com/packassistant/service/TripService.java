@@ -36,7 +36,6 @@ public class TripService {
     public Trip update(UUID id, Trip tripDetails) {
         Trip trip = findById(id);
         trip.setName(tripDetails.getName());
-        trip.setDestination(tripDetails.getDestination());
         trip.setStartDate(tripDetails.getStartDate());
         trip.setEndDate(tripDetails.getEndDate());
         trip.setType(tripDetails.getType());
