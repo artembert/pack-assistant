@@ -45,4 +45,15 @@ public class Trip {
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
     private ZonedDateTime updatedAt;
+
+    @Transient
+    private Integer done = 0;
+
+    @Transient
+    private Integer total = 0;
+
+    public void setProgress(int done, int total) {
+        this.done = done;
+        this.total = total;
+    }
 } 
