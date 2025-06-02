@@ -11,6 +11,7 @@ import { GetTripById } from 'graphql/trips'
 import { useQuery } from '@apollo/client'
 import { useState } from 'react'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { PackingProgress } from 'components/PackingProgress'
 
 const formatDayMonth = (date: string) => {
   return Intl.DateTimeFormat('en-US', {
@@ -39,6 +40,7 @@ export const PackingListPage: React.FC = () => {
           <Box sx={{ mt: 2 }}>
             <TripName name={data.trip.name} />
           </Box>
+          <PackingProgress total={data.trip.total} packed={data.trip.done} />
           <Typography color="text.secondary" sx={{ mt: 1 }}>
             {data.trip.destination} ·{' '}
             {data.trip.startDate ? formatDayMonth(data.trip.startDate) : ''} –{' '}
