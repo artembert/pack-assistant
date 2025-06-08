@@ -36,9 +36,7 @@ export const AddItemDialog: React.FC<AddItemDialogProps> = ({
 }) => {
   const [name, setName] = useState('')
   const [selectedGroup, setSelectedGroup] = useState('')
-  const [quantity, setQuantity] = useState(1)
   const [notes, setNotes] = useState('')
-  const [recommended, setRecommended] = useState(false)
 
   const [createItem] = useMutation(CreateItem)
 
@@ -51,9 +49,9 @@ export const AddItemDialog: React.FC<AddItemDialogProps> = ({
           input: {
             name,
             itemGroupId: selectedGroup,
-            quantity,
+            quantity: 1,
             notes: notes || undefined,
-            recommended
+            recommended: false
           }
         }
       })
@@ -62,9 +60,7 @@ export const AddItemDialog: React.FC<AddItemDialogProps> = ({
       // Reset form
       setName('')
       setSelectedGroup('')
-      setQuantity(1)
       setNotes('')
-      setRecommended(false)
     } catch (error) {
       console.error('Error creating item:', error)
     }
@@ -107,31 +103,12 @@ export const AddItemDialog: React.FC<AddItemDialogProps> = ({
           </FormControl>
 
           <TextField
-            label="Quantity"
-            type="number"
-            value={quantity}
-            onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
-            inputProps={{ min: 1 }}
-            fullWidth
-          />
-
-          <TextField
             label="Notes (optional)"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             multiline
             rows={2}
             fullWidth
-          />
-
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={recommended}
-                onChange={(e) => setRecommended(e.target.checked)}
-              />
-            }
-            label="Recommended item"
           />
         </Box>
       </DialogContent>
