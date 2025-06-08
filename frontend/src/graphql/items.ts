@@ -22,7 +22,6 @@ export const CreateItem = gql`
       packed
       recommended
       notes
-      itemGroupId
     }
   }
 `
