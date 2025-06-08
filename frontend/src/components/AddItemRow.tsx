@@ -11,6 +11,10 @@ interface AddItemRowProps {
 
 export function AddItemRow({ itemGroups, onItemCreated }: AddItemRowProps) {
   const [open, setOpen] = useState(false)
+  const handleCreated = () => {
+    setOpen(false)
+    onItemCreated()
+  }
 
   return (
     <>
@@ -26,7 +30,7 @@ export function AddItemRow({ itemGroups, onItemCreated }: AddItemRowProps) {
         open={open}
         onClose={() => setOpen(false)}
         itemGroups={itemGroups}
-        onItemCreated={onItemCreated}
+        onItemCreated={handleCreated}
       />
     </>
   )
