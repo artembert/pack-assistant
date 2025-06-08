@@ -10,6 +10,7 @@ export interface CategorySectionProps {
   total: number
   items: PackingItem[]
   onCheck: (item: PackingItem) => void
+  onDelete: (item: PackingItem) => void
 }
 
 export function CategorySection({
@@ -17,7 +18,8 @@ export function CategorySection({
   count,
   total,
   items,
-  onCheck
+  onCheck,
+  onDelete
 }: CategorySectionProps) {
   const [expanded, setExpanded] = useState(true)
 
@@ -63,7 +65,9 @@ export function CategorySection({
         />
       </Box>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        {items && <ItemList items={items} onCheck={onCheck} />}
+        {items && (
+          <ItemList items={items} onCheck={onCheck} onDelete={onDelete} />
+        )}
       </Collapse>
     </Box>
   )

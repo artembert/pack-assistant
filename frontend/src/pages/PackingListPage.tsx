@@ -69,6 +69,7 @@ export const PackingListPage: React.FC = () => {
                 total={itemGroup.total}
                 items={itemGroup.items}
                 onCheck={() => refetch()}
+                onDelete={() => refetch()}
               />
             ))}
           </Box>

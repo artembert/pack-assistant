@@ -26,3 +26,9 @@ export const CreateItem = gql`
     }
   }
 `
+
+export const DeleteItem = gql`
+  mutation DeleteItem($id: ID!) {
+    deleteItem(id: $id)
+  }
+`
