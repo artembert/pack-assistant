@@ -14,9 +14,9 @@ public interface ItemRepository extends JpaRepository<Item, UUID> {
     
     List<Item> findAllByItemGroupTripId(UUID tripId);
     
-    List<Item> findByTripIdAndPacked(UUID tripId, Boolean packed);
+    List<Item> findByItemGroupTripIdAndPacked(UUID tripId, Boolean packed);
 
-    long countByTripId(UUID tripId);
+    long countByItemGroupTripId(UUID tripId);
 
-    long countPackedByTripId(UUID tripId);
+    long countByItemGroupTripIdAndPacked(UUID tripId, Boolean packed);
 } 
