@@ -85,17 +85,17 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<Item> findByTripIdAndPacked(UUID tripId, Boolean packed) {
-        return itemRepository.findByTripIdAndPacked(tripId, packed);
+        return itemRepository.findByItemGroupTripIdAndPacked(tripId, packed);
     }
 
     @Override
     public long countByTripId(UUID tripId) {
-        return itemRepository.countByTripId(tripId);
+        return itemRepository.countByItemGroupTripId(tripId);
     }
 
     @Override
     public long countPackedByTripId(UUID tripId) {
-        return itemRepository.countPackedByTripId(tripId);
+        return itemRepository.countByItemGroupTripIdAndPacked(tripId, true);
     }
 
     @Override
