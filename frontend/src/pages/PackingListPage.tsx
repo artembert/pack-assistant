@@ -54,6 +54,7 @@ export const PackingListPage: React.FC = () => {
             <Button
               variant="text"
               color="primary"
+              sx={{ textTransform: 'none' }}
               onClick={() => setShowUnchecked(!showUnchecked)}
               startIcon={showUnchecked ? <VisibilityOff /> : <Visibility />}
             >
