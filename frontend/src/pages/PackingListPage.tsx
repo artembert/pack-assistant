@@ -3,7 +3,6 @@ import { TripName } from 'components/TripName'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AddItemRow } from '../components/AddItemRow'
 import { CategorySection } from '../components/CategorySection'
-import { FloatingAddButton } from '../components/FloatingAddButton'
 import { HeaderBar } from '../components/HeaderBar'
 import { PageLayout } from '../components/PageLayout'
 import { GetTripQuery, QueryTripArgs } from '__generated__/graphql'
@@ -76,8 +75,6 @@ export const PackingListPage: React.FC = () => {
           </Box>
         </>
       )}
-
-      <FloatingAddButton />
     </PageLayout>
   )
 }
