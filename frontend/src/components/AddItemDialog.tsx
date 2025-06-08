@@ -2,17 +2,16 @@ import { useMutation } from '@apollo/client'
 import {
   Box,
   Button,
-  Checkbox,
   DialogActions,
   DialogContent,
   DialogTitle,
   FormControl,
-  FormControlLabel,
   InputLabel,
   MenuItem,
   Select,
   SwipeableDrawer,
-  TextField
+  TextField,
+  Typography
 } from '@mui/material'
 import { ItemGroup } from '__generated__/graphql'
 import { CreateItem } from 'graphql/items'
@@ -75,8 +74,21 @@ export const AddItemDialog: React.FC<AddItemDialogProps> = ({
       swipeAreaWidth={56}
       disableSwipeToOpen={true}
       onOpen={() => {}}
+      slotProps={{
+        paper: {
+          sx: {
+            borderTopLeftRadius: '28px',
+            borderTopRightRadius: '28px'
+          }
+        }
+      }}
     >
-      <DialogTitle>Add New Item</DialogTitle>
+      <div className="absolute left-1/2 top-2 h-[6px] w-[30px] -translate-x-1/2 rounded-[3px] bg-gray-300 dark:bg-gray-900" />
+      <DialogTitle>
+        <Typography variant="h6" fontWeight="bold">
+          Add New Item
+        </Typography>
+      </DialogTitle>
       <DialogContent>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 1 }}>
           <TextField
@@ -113,10 +125,13 @@ export const AddItemDialog: React.FC<AddItemDialogProps> = ({
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button variant="text" sx={{ textTransform: 'none' }} onClick={onClose}>
+          Cancel
+        </Button>
         <Button
+          variant="outlined"
+          sx={{ bgcolor: '#f3f7fb', borderRadius: 4, textTransform: 'none' }}
           onClick={handleSubmit}
-          variant="contained"
           disabled={!name || !selectedGroup}
         >
           Add Item
