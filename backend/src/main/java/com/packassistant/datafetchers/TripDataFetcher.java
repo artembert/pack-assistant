@@ -23,13 +23,11 @@ public class TripDataFetcher {
     private final TripService tripService;
 
     @DgsQuery
-    @Transactional(readOnly = true) // TODO: This annotation is not strictly necessary here
     public List<Trip> trips() {
         return tripService.findAll();
     }
 
     @DgsQuery
-    @Transactional(readOnly = true) // TODO: This annotation is not strictly necessary here
     public Trip trip(@InputArgument("input") TripFilterInput input) {
         Trip trip = tripService.findById(UUID.fromString(input.getId()));
         if (!input.getShowUnchecked()) {
@@ -41,7 +39,6 @@ public class TripDataFetcher {
     }
 
     @DgsMutation
-    @Transactional // TODO: This annotation is not strictly necessary here
     public Trip createTrip(@InputArgument("input") CreateTripInput input) {
         Trip trip = new Trip();
         trip.setName(input.getName());
@@ -53,7 +50,6 @@ public class TripDataFetcher {
     }
 
     @DgsMutation
-    @Transactional // TODO: This annotation is not strictly necessary here
     public Trip updateTrip(@InputArgument String id, @InputArgument("input") UpdateTripInput input) {
         Trip trip = new Trip();
         trip.setName(input.getName());
@@ -65,7 +61,6 @@ public class TripDataFetcher {
     }
 
     @DgsMutation
-    @Transactional // TODO: This annotation is not strictly necessary here
     public Boolean deleteTrip(@InputArgument String id) {
         tripService.delete(UUID.fromString(id));
         return true;
