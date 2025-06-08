@@ -1,22 +1,22 @@
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormControlLabel,
-  Checkbox,
-  Box
-} from '@mui/material'
 import { useMutation } from '@apollo/client'
-import { useState } from 'react'
-import { CreateItem } from 'graphql/items'
+import {
+  Box,
+  Button,
+  Checkbox,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControl,
+  FormControlLabel,
+  InputLabel,
+  MenuItem,
+  Select,
+  SwipeableDrawer,
+  TextField
+} from '@mui/material'
 import { ItemGroup } from '__generated__/graphql'
+import { CreateItem } from 'graphql/items'
+import { useState } from 'react'
 
 interface AddItemDialogProps {
   open: boolean
@@ -24,6 +24,9 @@ interface AddItemDialogProps {
   itemGroups: Pick<ItemGroup, 'id' | 'name'>[]
   onItemCreated: () => void
 }
+
+const container =
+  typeof window !== 'undefined' ? window.document.body : undefined
 
 export const AddItemDialog: React.FC<AddItemDialogProps> = ({
   open,
@@ -68,7 +71,15 @@ export const AddItemDialog: React.FC<AddItemDialogProps> = ({
   }
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+    <SwipeableDrawer
+      container={container}
+      anchor="bottom"
+      open={open}
+      onClose={onClose}
+      swipeAreaWidth={56}
+      disableSwipeToOpen={true}
+      onOpen={() => {}}
+    >
       <DialogTitle>Add New Item</DialogTitle>
       <DialogContent>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 1 }}>
@@ -134,6 +145,6 @@ export const AddItemDialog: React.FC<AddItemDialogProps> = ({
           Add Item
         </Button>
       </DialogActions>
-    </Dialog>
+    </SwipeableDrawer>
   )
 }
