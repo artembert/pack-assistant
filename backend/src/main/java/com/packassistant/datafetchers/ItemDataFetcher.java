@@ -21,9 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 public class ItemDataFetcher {
     private final ItemService itemService;
     @DgsMutation
-    @Transactional // Здесь транзация тоже не нужна, она должна оставаться на уровне сервиса(ов)
+    @Transactional // TODO: Здесь транзация тоже не нужна, она должна оставаться на уровне сервиса(ов)
     public Item createItem(@InputArgument("input") CreateItemInput input) {
-        Item item = new Item(); // Заменить конструктором или билдером
+        Item item = new Item(); // TODO: Заменить конструктором или билдером
         item.setName(input.getName());
         item.setQuantity(input.getQuantity());
         item.setPacked(false); // New items are not packed by default
@@ -38,7 +38,7 @@ public class ItemDataFetcher {
     }
 
     @DgsMutation
-    @Transactional // Здесь транзация тоже не нужна, она должна оставаться на уровне сервиса(ов)
+    @Transactional // TODO: Здесь транзация тоже не нужна, она должна оставаться на уровне сервиса(ов)
     public Item updateItem(@InputArgument String id, @InputArgument("input") UpdateItemInput input) {
         Item item = new Item();
         item.setName(input.getName());
@@ -47,5 +47,11 @@ public class ItemDataFetcher {
         item.setRecommended(input.getRecommended());
         item.setNotes(input.getNotes());
         return itemService.update(UUID.fromString(id), item);
+    }
+
+    @DgsMutation
+    public Boolean deleteItem(@InputArgument String id) {
+        itemService.delete(UUID.fromString(id));
+        return true;
     }
 } 
