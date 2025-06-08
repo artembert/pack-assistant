@@ -4,6 +4,7 @@ import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.DgsMutation;
 import com.netflix.graphql.dgs.InputArgument;
+import com.packassistant.entity.Item;
 import com.packassistant.entity.Trip;
 import com.packassistant.datafetchers.model.CreateTripInput;
 import com.packassistant.datafetchers.model.TripFilterInput;
@@ -32,7 +33,7 @@ public class TripDataFetcher {
         Trip trip = tripService.findById(UUID.fromString(input.getId()));
         if (!input.getShowUnchecked()) {
             trip.getItemGroups().forEach(itemGroup -> {
-                itemGroup.getItems().removeIf(item -> item.getPacked());
+                itemGroup.getItems().removeIf(Item::getPacked);
             });
         }
         return trip;
