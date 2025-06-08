@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true) // TODO: Перенести транзакции только на отдельные нужные методы
 @Slf4j
 public class TripServiceImpl implements TripService {
     private final TripRepository tripRepository;

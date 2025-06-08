@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true) // TODO: Перенести транзакции только на отдельные нужные методы
 public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
     private final ItemGroupRepository itemGroupRepository;
