@@ -23,7 +23,7 @@ const getRandomStyle = (): React.CSSProperties => {
 }
 
 interface CreativeTripNameProps {
-  name: string,
+  name: string
   interactive?: boolean
 }
 
@@ -48,6 +48,7 @@ export function TripName({ name, interactive = false }: CreativeTripNameProps) {
         display: 'flex',
         justifyContent: 'flex-start',
         flexWrap: 'wrap',
+        gap: 1,
         transition: 'opacity 0.2s cubic-bezier(0.05, 0.7, 0.1, 1.0)',
         ...(interactive && {
           '&:hover': {
@@ -57,15 +58,23 @@ export function TripName({ name, interactive = false }: CreativeTripNameProps) {
         })
       }}
     >
-      {name.split('').map((char, i) => {
-        if (char === ' ')
-          return <span key={i} style={{ width: 16, display: 'inline-block' }} />
-        return (
-          <span key={i} style={charStyles[i] as React.CSSProperties}>
-            {char}
-          </span>
-        )
-      })}
+      {name.split(' ').map((word, wordIndex) => (
+        <span key={wordIndex} style={{ whiteSpace: 'nowrap' }}>
+          {word.split('').map((char, charIndex) => {
+            const absoluteIndex =
+              name.split(' ').slice(0, wordIndex).join('').length + charIndex
+
+            return (
+              <span
+                key={charIndex}
+                style={charStyles[absoluteIndex] as React.CSSProperties}
+              >
+                {char}
+              </span>
+            )
+          })}
+        </span>
+      ))}
     </Typography>
   )
 }
