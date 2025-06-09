@@ -42,11 +42,11 @@ public class TripDataFetcher {
     public Trip createTrip(@InputArgument("input") CreateTripInput input) {
         Trip trip = new Trip(
             null, // id will be generated
-            input.getName(),
-            input.getDestination(),
-            input.getStartDate(),
-            input.getEndDate(),
-            input.getType(),
+            input.name(),
+            input.destination(),
+            input.startDate(),
+            input.endDate(),
+            input.type(),
             new ArrayList<>(), // itemGroups will be empty initially
             null, // createdAt will be set by Hibernate
             null, // updatedAt will be set by Hibernate
@@ -60,11 +60,11 @@ public class TripDataFetcher {
     public Trip updateTrip(@InputArgument String id, @InputArgument("input") UpdateTripInput input) {
         Trip trip = new Trip(
             null, // id will be preserved by service
-            input.getName(),
-            input.getDestination(),
-            input.getStartDate(),
-            input.getEndDate(),
-            input.getType(),
+            input.name(),
+            input.destination(),
+            input.startDate(),
+            input.endDate(),
+            input.type(),
             null, // itemGroups will be preserved by service
             null, // createdAt will be preserved by service
             null, // updatedAt will be set by Hibernate
