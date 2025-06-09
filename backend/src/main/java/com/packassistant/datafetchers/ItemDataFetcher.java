@@ -2,8 +2,6 @@ package com.packassistant.datafetchers;
 
 import java.util.UUID;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsMutation;
 import com.netflix.graphql.dgs.InputArgument;
