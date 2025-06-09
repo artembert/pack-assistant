@@ -31,9 +31,9 @@ public class TripDataFetcher {
     public Trip trip(@InputArgument("input") TripFilterInput input) {
         Trip trip = tripService.findById(UUID.fromString(input.getId()));
         if (!input.getShowUnchecked()) {
-            trip.getItemGroups().forEach(itemGroup -> {
-                itemGroup.getItems().removeIf(Item::getPacked);
-            });
+            trip.getItemGroups().forEach(itemGroup ->
+                itemGroup.getItems().removeIf(Item::getPacked)
+            );
         }
         return trip;
     }
@@ -41,17 +41,17 @@ public class TripDataFetcher {
     @DgsMutation
     public Trip createTrip(@InputArgument("input") CreateTripInput input) {
         Trip trip = new Trip(
-                null, // id will be generated
-                input.getName(),
-                input.getDestination(),
-                input.getStartDate(),
-                input.getEndDate(),
-                input.getType(),
-                new ArrayList<>(), // itemGroups will be empty initially
-                null, // createdAt will be set by Hibernate
-                null, // updatedAt will be set by Hibernate
-                0, // done - initial progress
-                0  // total - initial progress
+            null, // id will be generated
+            input.getName(),
+            input.getDestination(),
+            input.getStartDate(),
+            input.getEndDate(),
+            input.getType(),
+            new ArrayList<>(), // itemGroups will be empty initially
+            null, // createdAt will be set by Hibernate
+            null, // updatedAt will be set by Hibernate
+            0, // done - initial progress
+            0  // total - initial progress
         );
         return tripService.create(trip);
     }
@@ -59,17 +59,17 @@ public class TripDataFetcher {
     @DgsMutation
     public Trip updateTrip(@InputArgument String id, @InputArgument("input") UpdateTripInput input) {
         Trip trip = new Trip(
-                null, // id will be preserved by service
-                input.getName(),
-                input.getDestination(),
-                input.getStartDate(),
-                input.getEndDate(),
-                input.getType(),
-                null, // itemGroups will be preserved by service
-                null, // createdAt will be preserved by service
-                null, // updatedAt will be set by Hibernate
-                0, // done - will be recalculated by service
-                0  // total - will be recalculated by service
+            null, // id will be preserved by service
+            input.getName(),
+            input.getDestination(),
+            input.getStartDate(),
+            input.getEndDate(),
+            input.getType(),
+            null, // itemGroups will be preserved by service
+            null, // createdAt will be preserved by service
+            null, // updatedAt will be set by Hibernate
+            0, // done - will be recalculated by service
+            0  // total - will be recalculated by service
         );
         return tripService.update(UUID.fromString(id), trip);
     }
