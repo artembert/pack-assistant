@@ -1,21 +1,20 @@
 package com.packassistant.datafetchers;
 
 import com.netflix.graphql.dgs.DgsComponent;
-import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.DgsMutation;
+import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
-import com.packassistant.entity.Item;
-import com.packassistant.entity.Trip;
 import com.packassistant.datafetchers.model.CreateTripInput;
 import com.packassistant.datafetchers.model.TripFilterInput;
 import com.packassistant.datafetchers.model.UpdateTripInput;
+import com.packassistant.entity.Item;
+import com.packassistant.entity.Trip;
 import com.packassistant.service.TripService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.transaction.annotation.Transactional;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @DgsComponent
 @RequiredArgsConstructor
@@ -41,23 +40,37 @@ public class TripDataFetcher {
 
     @DgsMutation
     public Trip createTrip(@InputArgument("input") CreateTripInput input) {
-        Trip trip = new Trip();
-        trip.setName(input.getName());
-        trip.setDestination(input.getDestination());
-        trip.setStartDate(input.getStartDate());
-        trip.setEndDate(input.getEndDate());
-        trip.setType(input.getType());
+        Trip trip = new Trip(
+                null, // id will be generated
+                input.getName(),
+                input.getDestination(),
+                input.getStartDate(),
+                input.getEndDate(),
+                input.getType(),
+                new ArrayList<>(), // itemGroups will be empty initially
+                null, // createdAt will be set by Hibernate
+                null, // updatedAt will be set by Hibernate
+                0, // done - initial progress
+                0  // total - initial progress
+        );
         return tripService.create(trip);
     }
 
     @DgsMutation
     public Trip updateTrip(@InputArgument String id, @InputArgument("input") UpdateTripInput input) {
-        Trip trip = new Trip();
-        trip.setName(input.getName());
-        trip.setDestination(input.getDestination());
-        trip.setStartDate(input.getStartDate());
-        trip.setEndDate(input.getEndDate());
-        trip.setType(input.getType());
+        Trip trip = new Trip(
+                null, // id will be preserved by service
+                input.getName(),
+                input.getDestination(),
+                input.getStartDate(),
+                input.getEndDate(),
+                input.getType(),
+                null, // itemGroups will be preserved by service
+                null, // createdAt will be preserved by service
+                null, // updatedAt will be set by Hibernate
+                0, // done - will be recalculated by service
+                0  // total - will be recalculated by service
+        );
         return tripService.update(UUID.fromString(id), trip);
     }
 

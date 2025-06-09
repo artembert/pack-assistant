@@ -22,13 +22,18 @@ public class ItemDataFetcher {
     private final ItemService itemService;
     @DgsMutation
     public Item createItem(@InputArgument("input") CreateItemInput input) {
-        Item item = new Item(); // TODO: Заменить конструктором или билдером
-        item.setName(input.getName());
-        item.setQuantity(input.getQuantity());
-        item.setPacked(false); // New items are not packed by default
-        item.setRecommended(false); // Manually created items are not recommended by default
-        item.setNotes(input.getNotes());
-        
+        Item item = new Item(
+                null,
+                input.getName(),
+                input.getQuantity(),
+                false, // New items are not packed by default
+                false, // Manually created items are not recommended by default
+                input.getNotes(),
+                null,
+                null,
+                null
+        );
+
         Item createdItem = itemService.create(UUID.fromString(input.getItemGroupId()), item);
         if (createdItem == null) {
             throw new RuntimeException("Failed to create item");
@@ -38,12 +43,17 @@ public class ItemDataFetcher {
 
     @DgsMutation
     public Item updateItem(@InputArgument String id, @InputArgument("input") UpdateItemInput input) {
-        Item item = new Item();
-        item.setName(input.getName());
-        item.setQuantity(input.getQuantity());
-        item.setPacked(input.getPacked());
-        item.setRecommended(input.getRecommended());
-        item.setNotes(input.getNotes());
+        Item item = new Item(
+                null,
+                input.getName(),
+                input.getQuantity(),
+                input.getPacked(),
+                input.getRecommended(),
+                input.getNotes(),
+                null, // itemGroup will be preserved by service
+                null,
+                null
+        );
         return itemService.update(UUID.fromString(id), item);
     }
 
